@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
 import UpdateTable, { Actor } from "../components/UpdateTable";
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const Update = () => {
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
   const [name, setName] = useState("");
   let [data, setData] = useState<Actor[]>();
   let [buttonText, setButtonText] = useState("Search");

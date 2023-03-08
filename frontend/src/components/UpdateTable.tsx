@@ -1,7 +1,6 @@
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
 import { useState } from 'react';
 import axios from 'axios';
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 export interface TableCompProps {
   data: Actor[];
@@ -15,6 +14,8 @@ export interface TableCompProps {
  }
 
 export default function UpdateTable({data} : TableCompProps) {
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
   const [actorId, setActorId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

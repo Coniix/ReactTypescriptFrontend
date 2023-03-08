@@ -2,10 +2,11 @@ import { SetStateAction, useState } from 'react';
 import axios from 'axios';
 import TableComp, {Actor} from "../components/TableComp";
 import * as dotenv from 'dotenv'
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const Delete = () => {
   const [actorId, setActorId] = useState("");
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
   let [data, setData] = useState<Actor[]>();
 
   console.log(process.env.DB_USER);
