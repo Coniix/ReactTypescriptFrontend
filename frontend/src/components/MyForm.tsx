@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 import TableComp, { Actor } from "../components/TableComp";
 
 
 export default function MyForm() {
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [data, setData] = useState<Actor[]>();
