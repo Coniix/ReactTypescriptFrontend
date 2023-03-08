@@ -7,7 +7,7 @@ const Play = () => {
   const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
   const ENDPOINT = `${apiUrl}/actors/`;
   const fetcher = (url: string) =>
-    fetch(`${ENDPOINT}/${url}`).then((r) => r.json());
+    fetch(`${apiUrl}/${url}`).then((r) => r.json());
     const { data, mutate } = useSWR("actors/", fetcher);
     let [text, setText] = useState("");
     let [timerId, setTimerId] = useState<number>(0);
