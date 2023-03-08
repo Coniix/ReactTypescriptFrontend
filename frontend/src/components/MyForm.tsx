@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
+import TableComp, { Actor } from "../components/TableComp";
+
 
 export default function MyForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [data, setData] = useState<Actor[]>();
+
 
   const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     // alert(`The name you entered was: ${firstName} ${lastName}`)
     const actorDetails = { firstName: `${firstName}`, lastName: `${lastName}`};
     axios.post('http://localhost:8080/actors/', actorDetails).then((response) => {
+      console.log([response.data]);
+      setData([response.data]);
     }).catch((error) => {
         if( error.response ){
             console.log(error.response.data); // => the response payload 
@@ -19,6 +25,7 @@ export default function MyForm() {
   }
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <label>Enter actor first name:      </label>
         <input
@@ -38,5 +45,11 @@ export default function MyForm() {
       <br></br><br></br>
       <input  id="button" type="submit" />
     </form>
+    <br></br>
+      {!data ? "" :  
+      <TableComp 
+      data = {data}
+  />}
+  </>
   )
 }
