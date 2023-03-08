@@ -8,10 +8,6 @@ const Delete = () => {
   const apiUrl = "http://20.126.133.103:8080";
 
   let [data, setData] = useState<Actor[]>();
-
-  console.log(process.env.DB_USER);
-  console.log(process.env.ENV);
-  console.log(process.env.DB_PORT);
     
   const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
