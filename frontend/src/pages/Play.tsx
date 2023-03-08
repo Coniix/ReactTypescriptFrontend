@@ -3,7 +3,7 @@ import useTypingGame from "react-typing-game-hook";
 import "../styles.css";
 import { useState } from 'react';
 
-export const ENDPOINT = "http://localhost:8080";
+export const ENDPOINT = `${apiUrl}/actors/`;
 const fetcher = (url: string) =>
   fetch(`${ENDPOINT}/${url}`).then((r) => r.json());
 
