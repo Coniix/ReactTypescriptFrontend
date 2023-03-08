@@ -5,7 +5,7 @@ import TableComp, { Actor } from "../components/TableComp";
 
 
 export default function MyForm() {
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+  const apiUrl = "http://20.126.133.103:8080";
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [data, setData] = useState<Actor[]>();

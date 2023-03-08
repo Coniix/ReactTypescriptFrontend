@@ -6,7 +6,7 @@ export const ENDPOINT = "http://localhost:8080";
 
 
 const Read = () => {
-    const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+    const apiUrl = "http://20.126.133.103:8080";
 
     const fetcher = (url: string) =>
     fetch(`${apiUrl}/${url}`).then((r) => r.json());

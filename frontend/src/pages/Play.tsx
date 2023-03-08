@@ -4,7 +4,7 @@ import "../styles.css";
 import { useState } from 'react';
 
 const Play = () => {
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+  const apiUrl = "http://20.126.133.103:8080";
   const ENDPOINT = `${apiUrl}/actors/`;
   const fetcher = (url: string) =>
     fetch(`${apiUrl}/${url}`).then((r) => r.json());

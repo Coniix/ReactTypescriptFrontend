@@ -14,7 +14,7 @@ export interface TableCompProps {
  }
 
 export default function UpdateTable({data} : TableCompProps) {
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+  const apiUrl = "http://20.126.133.103:8080";
 
   const [actorId, setActorId] = useState("");
   const [firstName, setFirstName] = useState("");

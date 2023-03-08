@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv'
 
 const Delete = () => {
   const [actorId, setActorId] = useState("");
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+  const apiUrl = "http://20.126.133.103:8080";
 
   let [data, setData] = useState<Actor[]>();
 

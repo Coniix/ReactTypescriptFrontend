@@ -3,7 +3,7 @@ import axios from 'axios';
 import UpdateTable, { Actor } from "../components/UpdateTable";
 
 const Update = () => {
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+  const apiUrl = "http://20.126.133.103:8080";
 
   const [name, setName] = useState("");
   let [data, setData] = useState<Actor[]>();
