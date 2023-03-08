@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 import TableComp, { Actor } from "../components/TableComp";
 
 
@@ -14,7 +15,7 @@ export default function MyForm() {
     event.preventDefault();
     // alert(`The name you entered was: ${firstName} ${lastName}`)
     const actorDetails = { firstName: `${firstName}`, lastName: `${lastName}`};
-    axios.post('http://localhost:8080/actors/', actorDetails).then((response) => {
+    axios.post(`${apiUrl}/actors/`, actorDetails).then((response) => {
       console.log([response.data]);
       setData([response.data]);
     }).catch((error) => {

@@ -2,6 +2,7 @@ import { SetStateAction, useState } from 'react';
 import axios from 'axios';
 import TableComp, {Actor} from "../components/TableComp";
 import * as dotenv from 'dotenv'
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const Delete = () => {
   const [actorId, setActorId] = useState("");
@@ -15,7 +16,7 @@ const Delete = () => {
     event.preventDefault();
     // alert(`The name you entered was: ${firstName} ${lastName}`)
     const deleteId = actorId
-    axios.delete(`${process.env.DB_ADDRESS}/actors/${deleteId}`).then((response: { data: SetStateAction<Actor[] | undefined>; }) => {
+    axios.delete(`${apiUrl}/actors/${deleteId}`).then((response: { data: SetStateAction<Actor[] | undefined>; }) => {
       setData(response.data)
     }).catch((error: { response: { data: any; }; }) => {
         if( error.response ){

@@ -2,7 +2,7 @@ import useSWR from "swr";
 import useTypingGame from "react-typing-game-hook";
 import "../styles.css";
 import { useState } from 'react';
-import {apiUrl} from "../config/constants"
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 export const ENDPOINT = `${apiUrl}/actors/`;
 const fetcher = (url: string) =>

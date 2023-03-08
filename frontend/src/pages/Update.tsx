@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import UpdateTable, { Actor } from "../components/UpdateTable";
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const Update = () => {
   const [name, setName] = useState("");
@@ -13,7 +14,7 @@ const Update = () => {
     setButtonText("Refresh");
     // alert(`The name you entered was: ${firstName} ${lastName}`)
     const actorName = name
-    axios.get(`http://localhost:8080/actors/search/${actorName}`).then((response) => {
+    axios.get(`${apiUrl}/actors/search/${actorName}`).then((response) => {
       setData(response.data)
     }).catch((error) => {
         if( error.response ){

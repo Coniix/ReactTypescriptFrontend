@@ -1,7 +1,7 @@
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
 import { useState } from 'react';
 import axios from 'axios';
-
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 export interface TableCompProps {
   data: Actor[];
@@ -37,7 +37,7 @@ export default function UpdateTable({data} : TableCompProps) {
   const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     const actorDetails = { firstName: `${firstName}`, lastName: `${lastName}`};
-    axios.patch(`http://localhost:8080/actors/${actorId}`, actorDetails).then((response) => {
+    axios.patch(`${apiUrl}/actors/${actorId}`, actorDetails).then((response) => {
     }).catch((error) => {
         if( error.response ){
             console.log(error.response.data); // => the response payload 
