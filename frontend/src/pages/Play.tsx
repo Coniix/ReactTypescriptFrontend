@@ -2,6 +2,7 @@ import useSWR from "swr";
 import useTypingGame from "react-typing-game-hook";
 import "../styles.css";
 import { useState } from 'react';
+import {apiUrl} from "../config/constants"
 
 export const ENDPOINT = `${apiUrl}/actors/`;
 const fetcher = (url: string) =>
@@ -10,7 +11,7 @@ const fetcher = (url: string) =>
 const Play = () => {
     const { data, mutate } = useSWR("actors/", fetcher);
     let [text, setText] = useState("");
-    let [timerId, setTimerId] = useState<number>();
+    let [timerId, setTimerId] = useState<number>(0);
     let [score, setScore] = useState<number>(0);
 
     const {
@@ -63,11 +64,11 @@ const Play = () => {
         setText(data[0].FirstName.toLowerCase() + " " + data[0].LastName.toLowerCase());
         data.shift();
 
-        //Timer before changing words
-        setTimerId(setTimeout(() => {
-            updateScore();
-            nextWord();
-        }, 5000));
+        // //Timer before changing words
+        // setTimerId(setTimeout(() => {
+        //     updateScore();
+        //     nextWord();
+        // }, 5000));
     }
 
     //Start game on click
