@@ -7,10 +7,12 @@ import Read from "./pages/Read";
 import Update from "./pages/Update";
 import Delete from "./pages/Delete";
 import Play from "./pages/Play";
+import Kotlin from "./pages/Kotlin";
 
 
 export default function App() {
   globalThis.apiUrl = "http://localhost:8080";
+  globalThis.kotlinApiUrl = "http://localhost:8081";
 
 
   return (
@@ -22,6 +24,7 @@ export default function App() {
           <Route path="Update" element={<Update />} />
           <Route path="Delete" element={<Delete />} />
           <Route path="Play" element={<Play />} />
+          <Route path="Kotlin" element={<Kotlin />} />
         </Route>
       </Routes>
     </BrowserRouter>

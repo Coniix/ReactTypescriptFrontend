@@ -12,6 +12,7 @@ const Layout = () => {
             <Button><Link to="/Update">Update</Link></Button>
             <Button><Link to="/Delete">Delete</Link></Button>
             <Button><Link to="/Play">Play</Link></Button>
+            <Button><Link to="/Kotlin">Kotlin</Link></Button>
         </Stack>
       </nav>
       <Outlet />
