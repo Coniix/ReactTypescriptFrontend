@@ -1,17 +1,19 @@
 import useSWR from "swr";
 import useTypingGame from "react-typing-game-hook";
 import "../styles.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useShallowEffect } from "@mantine/hooks";
+// import { clearInterval } from "timers";
 
 const Play = () => {
-  const apiUrl = "http://20.126.133.103:8080";
-  const ENDPOINT = `${apiUrl}/actors/`;
   const fetcher = (url: string) =>
-    fetch(`${apiUrl}/${url}`).then((r) => r.json());
+    fetch(`${globalThis.apiUrl}/${url}`).then((r) => r.json());
     const { data, mutate } = useSWR("actors/", fetcher);
     let [text, setText] = useState("");
-    let [timerId, setTimerId] = useState<number>(0);
+    let [timerId, setTimerId] = useState<any>();
+    let [countdown, setCountdown] = useState<number>(-1);
     let [score, setScore] = useState<number>(0);
+    let [gameStart, setGameStart] = useState<boolean>(false);
 
     const {
         states: {
@@ -29,58 +31,66 @@ const Play = () => {
       } = useTypingGame(text);
 
     const handleKey = (key: any) => {
-    if (key === "Escape") {
-        resetTyping();
-    } else if (key === "Backspace") {
-        deleteTyping(false);
-    } else if (key === "Enter") {
-        clearTimeout(timerId);
-        updateScore();
-        nextWord();
-    } else if (key.length === 1) {
-        insertTyping(key);
-    }
+      if (key === "Escape") {
+          resetTyping();
+      } else if (key === "Backspace") {
+          deleteTyping(false);
+      } else if (key === "Enter") {
+          clearTimeout(timerId);
+          setCountdown((countdownNum: number)=> countdownNum = 5)
+          updateScore();
+          nextWord();
+      } else if (key.length === 1) {
+          insertTyping(key);
+      }
     };
 
-    function updateScore() {
-
-        if(correctChar == length){
-            setScore(score + correctChar);
-        } else {
-            setScore(score - errorChar);
-        }
-        console.log(phase);
-        console.log(correctChar);
-        console.log(errorChar);
-        console.log(length);
-        console.log("score " + score);
-
-
-        return <div />;
-      }
-
-    const nextWord = () => {
+    function nextWord () {
         setText(data[0].FirstName.toLowerCase() + " " + data[0].LastName.toLowerCase());
         data.shift();
 
-        // //Timer before changing words
-        // setTimerId(setTimeout(() => {
-        //     updateScore();
-        //     nextWord();
-        // }, 5000));
+        //Timer before changing words
+        setTimerId(setTimeout(() => {
+            setCountdown((countdownNum: number)=> countdownNum = 5)
+            updateScore();
+            nextWord();
+        }, 5000));
     }
+
+    function updateScore() {
+      setScore((prevScore) => prevScore + (correctChar - errorChar));
+      console.log("score " + (correctChar));
+
+      return <div />;
+    }
+
+
+    useEffect(() => {
+      console.log("effect")
+      const interval = setInterval(() => {
+        setCountdown((prev: number)=>prev-0.05);
+      }, 50);
+
+      return ()=>{
+        clearInterval(interval)
+      }
+    }, []);
 
     //Start game on click
     const handleClick = async (event: { preventDefault: () => void; }) => {
+        setCountdown((countdownNum: number)=> countdownNum = 5)
         nextWord();
+        setGameStart(true)
         document.getElementById("typing-test")!.focus();        
     }
 
     return (
         <div>  
-            <h1>{!score ? "Play" : 
+            <h1>{!gameStart ? "Play" : 
                 <p>Score: {score}</p>
             }</h1>
+
+            <div>{countdown >= 0 && countdown?.toFixed(2)}</div>
 
             {!data ? "Loading..." : 
             <div> 

@@ -3,8 +3,6 @@ import axios from 'axios';
 import UpdateTable, { Actor } from "../components/UpdateTable";
 
 const Update = () => {
-  const apiUrl = "http://20.126.133.103:8080";
-
   const [name, setName] = useState("");
   let [data, setData] = useState<Actor[]>();
   let [buttonText, setButtonText] = useState("Search");
@@ -15,7 +13,7 @@ const Update = () => {
     setButtonText("Refresh");
     // alert(`The name you entered was: ${firstName} ${lastName}`)
     const actorName = name
-    axios.get(`${apiUrl}/actors/search/${actorName}`).then((response) => {
+    axios.get(`${globalThis.apiUrl}/actors/search/${actorName}`).then((response) => {
       setData(response.data)
     }).catch((error) => {
         if( error.response ){

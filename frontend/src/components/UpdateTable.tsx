@@ -14,8 +14,6 @@ export interface TableCompProps {
  }
 
 export default function UpdateTable({data} : TableCompProps) {
-  const apiUrl = "http://20.126.133.103:8080";
-
   const [actorId, setActorId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -38,7 +36,7 @@ export default function UpdateTable({data} : TableCompProps) {
   const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     const actorDetails = { firstName: `${firstName}`, lastName: `${lastName}`};
-    axios.patch(`${apiUrl}/actors/${actorId}`, actorDetails).then((response) => {
+    axios.patch(`${globalThis.apiUrl}/actors/${actorId}`, actorDetails).then((response) => {
     }).catch((error) => {
         if( error.response ){
             console.log(error.response.data); // => the response payload 

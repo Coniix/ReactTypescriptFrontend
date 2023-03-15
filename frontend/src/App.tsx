@@ -10,6 +10,8 @@ import Play from "./pages/Play";
 
 
 export default function App() {
+  globalThis.apiUrl = "http://localhost:8080";
+
 
   return (
     <BrowserRouter>

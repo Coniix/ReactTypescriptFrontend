@@ -5,7 +5,6 @@ import TableComp, { Actor } from "../components/TableComp";
 
 
 export default function MyForm() {
-  const apiUrl = "http://20.126.133.103:8080";
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [data, setData] = useState<Actor[]>();
@@ -15,7 +14,7 @@ export default function MyForm() {
     event.preventDefault();
     // alert(`The name you entered was: ${firstName} ${lastName}`)
     const actorDetails = { firstName: `${firstName}`, lastName: `${lastName}`};
-    axios.post(`${apiUrl}/actors/`, actorDetails).then((response) => {
+    axios.post(`${globalThis.apiUrl}/actors/`, actorDetails).then((response) => {
       console.log([response.data]);
       setData([response.data]);
     }).catch((error) => {

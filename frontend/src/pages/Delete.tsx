@@ -5,7 +5,6 @@ import * as dotenv from 'dotenv'
 
 const Delete = () => {
   const [actorId, setActorId] = useState("");
-  const apiUrl = "http://20.126.133.103:8080";
 
   let [data, setData] = useState<Actor[]>();
     
@@ -13,7 +12,7 @@ const Delete = () => {
     event.preventDefault();
     // alert(`The name you entered was: ${firstName} ${lastName}`)
     const deleteId = actorId
-    axios.delete(`${apiUrl}/actors/${deleteId}`).then((response: { data: SetStateAction<Actor[] | undefined>; }) => {
+    axios.delete(`${globalThis.apiUrl}/actors/${deleteId}`).then((response: { data: SetStateAction<Actor[] | undefined>; }) => {
       setData(response.data)
     }).catch((error: { response: { data: any; }; }) => {
         if( error.response ){
