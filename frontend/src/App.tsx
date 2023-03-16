@@ -16,7 +16,7 @@ export default function App() {
 
 
   return (
-    <BrowserRouter>
+    <><BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="Create" element={<Create />} />
@@ -27,6 +27,7 @@ export default function App() {
           <Route path="Kotlin" element={<Kotlin />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter><script type="text/javascript" src="src/javascript/filmPoster.js"></script></>
+
   );
 }
