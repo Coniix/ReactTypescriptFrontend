@@ -11,15 +11,15 @@ import {
   onGenerationComplete,
 } from "./helpers";
 
-// // This is a NodeJS-specific requirement - browsers implementations should omit this line.
-// GRPCWeb.setDefaultTransport(NodeHttpTransport());
+// This is a NodeJS-specific requirement - browsers implementations should omit this line.
+GRPCWeb.setDefaultTransport(NodeHttpTransport());
 
-// // Authenticate using your API key, don't commit your key to a public repository!
-// const metadata = new GRPCWeb.Metadata();
-// metadata.set("Authorization", "Bearer " + "sk-8u32MsTmPoaRY9lHmr0YlbyYt6VULJs51weRs5Tx3EMuQM0q");
+// Authenticate using your API key, don't commit your key to a public repository!
+const metadata = new GRPCWeb.Metadata();
+metadata.set("Authorization", "Bearer " + "sk-8u32MsTmPoaRY9lHmr0YlbyYt6VULJs51weRs5Tx3EMuQM0q");
 
-// // Create a generation client to use with all future requests
-// const client = new GC.GenerationServiceClient("https://grpc.stability.ai", {});
+// Create a generation client to use with all future requests
+const client = new GC.GenerationServiceClient("https://grpc.stability.ai", {});
   
 export interface multiMessages {
   data: Film[];
@@ -34,49 +34,49 @@ export interface Film {
 const Kotlin = () => {
   //Image generation
 
-  // const request = buildGenerationRequest("stable-diffusion-512-v2-1", {
-  //   type: "text-to-image",
-  //   prompts: [
-  //     {
-  //       text: "A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ",
-  //     },
-  //   ],
-  //   width: 512,
-  //   height: 512,
-  //   samples: 1,
-  //   cfgScale: 13,
-  //   steps: 25,
-  //   sampler: Generation.DiffusionSampler.SAMPLER_K_DPMPP_2M,
-  // });
+  const request = buildGenerationRequest("stable-diffusion-512-v2-1", {
+    type: "text-to-image",
+    prompts: [
+      {
+        text: "A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ",
+      },
+    ],
+    width: 512,
+    height: 512,
+    samples: 1,
+    cfgScale: 13,
+    steps: 25,
+    sampler: Generation.DiffusionSampler.SAMPLER_K_DPMPP_2M,
+  });
   
-  // executeGenerationRequest(client, request, metadata)
-  //   .then(onGenerationComplete)
-  //   .catch((error) => {
-  //     console.error("Failed to make text-to-image request:", error);
-  //   });
+  executeGenerationRequest(client, request, metadata)
+    .then(onGenerationComplete)
+    .catch((error) => {
+      console.error("Failed to make text-to-image request:", error);
+    });
 
    //Emd image generation
 
 
-  const [filmId, setFilmId] = useState("");
-  let [data, setData] = useState<Film>();
+  // const [filmId, setFilmId] = useState("");
+  // let [data, setData] = useState<Film>();
     
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
-    const searchId = filmId
-    axios.get(`${globalThis.kotlinApiUrl}/films/${searchId}`).then((response: { data: SetStateAction<Film | undefined>; }) => {
-      setData(response.data)
-    }).catch((error: { response: { data: any; }; }) => {
-        if( error.response ){
-            console.log(error.response.data); // => the response payload 
-        }
-    });;
-  }
+  // const handleSubmit = (event: { preventDefault: () => void; }) => {
+  //   event.preventDefault();
+  //   const searchId = filmId
+  //   axios.get(`${globalThis.kotlinApiUrl}/films/${searchId}`).then((response: { data: SetStateAction<Film | undefined>; }) => {
+  //     setData(response.data)
+  //   }).catch((error: { response: { data: any; }; }) => {
+  //       if( error.response ){
+  //           console.log(error.response.data); // => the response payload 
+  //       }
+  //   });;
+  // }
 
   return (
     <div>
       <h1>Search Movie</h1>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <label>Enter film ID:
           <input
             type="text" 
@@ -105,7 +105,7 @@ const Kotlin = () => {
                   </tr>
                 </tbody>
               </table>
-            }
+            } */}
             
     </div>
   )
