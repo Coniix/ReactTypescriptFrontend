@@ -1,7 +1,26 @@
 import axios from "axios";
 import { SetStateAction, useState } from "react";
+import * as Generation from "../generation/generation_pb";
+import * as GC from "../generation/generation_pb_service";
+import { grpc as GRPCWeb } from "@improbable-eng/grpc-web";
+import { NodeHttpTransport } from "@improbable-eng/grpc-web-node-http-transport";
+import fs from "fs";
+import {
+  buildGenerationRequest,
+  executeGenerationRequest,
+  onGenerationComplete,
+} from "./helpers";
 
+// // This is a NodeJS-specific requirement - browsers implementations should omit this line.
+// GRPCWeb.setDefaultTransport(NodeHttpTransport());
 
+// // Authenticate using your API key, don't commit your key to a public repository!
+// const metadata = new GRPCWeb.Metadata();
+// metadata.set("Authorization", "Bearer " + "sk-8u32MsTmPoaRY9lHmr0YlbyYt6VULJs51weRs5Tx3EMuQM0q");
+
+// // Create a generation client to use with all future requests
+// const client = new GC.GenerationServiceClient("https://grpc.stability.ai", {});
+  
 export interface multiMessages {
   data: Film[];
 }
@@ -13,6 +32,32 @@ export interface Film {
  }
 
 const Kotlin = () => {
+  //Image generation
+
+  // const request = buildGenerationRequest("stable-diffusion-512-v2-1", {
+  //   type: "text-to-image",
+  //   prompts: [
+  //     {
+  //       text: "A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ",
+  //     },
+  //   ],
+  //   width: 512,
+  //   height: 512,
+  //   samples: 1,
+  //   cfgScale: 13,
+  //   steps: 25,
+  //   sampler: Generation.DiffusionSampler.SAMPLER_K_DPMPP_2M,
+  // });
+  
+  // executeGenerationRequest(client, request, metadata)
+  //   .then(onGenerationComplete)
+  //   .catch((error) => {
+  //     console.error("Failed to make text-to-image request:", error);
+  //   });
+
+   //Emd image generation
+
+
   const [filmId, setFilmId] = useState("");
   let [data, setData] = useState<Film>();
     
